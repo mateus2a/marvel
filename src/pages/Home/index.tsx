@@ -1,3 +1,8 @@
+import { useEffect, useState } from 'react';
+
+import generateUrlParamsMarvelApi from '../../utils/generateUrlParamsMarvelApi';
+import { api } from '../../services/api';
+
 import Header from '../../components/Header';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -6,29 +11,27 @@ import CardGrid from '../../components/CardGrid';
 
 import * as S from './styles';
 
+interface Comic {
+  id: string;
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
+  title: string;
+}
+
 function Home() {
-  const arr = [
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-    'Homem Aranha',
-  ];
+  const [comics, setComics] = useState([]);
+
+  useEffect(() => {
+    async function loadData() {
+      const response = await api.get(`/comics?${generateUrlParamsMarvelApi()}`);
+
+      setComics(response.data.data.results);
+    }
+
+    loadData();
+  }, []);
 
   return (
     <S.Container>
@@ -37,12 +40,11 @@ function Home() {
         <Input type="text" placeholder="Buscar pelo nome do quadrinho" />
 
         <CardGrid>
-          {arr.map((item, index) => (
+          {comics.map((item: Comic) => (
             <Card
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
-              imgUrl="https://ik.imagekit.io/lzkiso6iri/image_2_wFEaPwPbK.png?updatedAt=1640369489047"
-              title={item}
+              key={item.id}
+              imgUrl={`${item.thumbnail.path}.${item.thumbnail.extension}`}
+              title={item.title}
             />
           ))}
         </CardGrid>
