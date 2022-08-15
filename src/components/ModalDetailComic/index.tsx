@@ -20,7 +20,7 @@ interface Comic {
 }
 
 interface ModalDetailComicProps {
-  comic: Comic;
+  comic?: Comic;
   isOpen: boolean;
   onRequestClose: () => void;
 }
@@ -37,47 +37,47 @@ function ModalDetailComic({
       contentLabel="Comic Detail"
     >
       <S.Wrapper>
-        <h2>{comic.title}</h2>
+        <h2>{comic?.title}</h2>
         <S.Content>
           <img
-            src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-            alt={`${comic.title} banner`}
+            src={`${comic?.thumbnail.path}.${comic?.thumbnail.extension}`}
+            alt={`${comic?.title} banner`}
           />
           <S.ContentDetail>
             <div>
               <strong>Descrição</strong>
               <p>
-                {comic.description
-                  ? comic.description
+                {comic?.description
+                  ? comic?.description
                   : 'Descrição indisponível'}
               </p>
             </div>
             <div>
               <strong>Total de páginas</strong>
               <p>
-                {comic.pageCount
-                  ? comic.pageCount
+                {comic?.pageCount
+                  ? comic?.pageCount
                   : 'Total de páginas indisponível'}
               </p>
             </div>
             <div>
               <strong>Criadores</strong>
-              {comic.creators.items.length < 1 && (
+              {comic && comic.creators.items.length < 1 && (
                 <p>Criadores não informados</p>
               )}
               <ul>
-                {comic.creators.items.map((creator) => (
+                {comic?.creators.items.map((creator) => (
                   <li key={creator.name}>{creator.name}</li>
                 ))}
               </ul>
             </div>
             <div>
               <strong>Personagens</strong>
-              {comic.characters.items.length < 1 && (
+              {comic && comic.characters.items.length < 1 && (
                 <p>Personagens não informados</p>
               )}
               <ul>
-                {comic.characters.items.map((character) => (
+                {comic?.characters.items.map((character) => (
                   <li key={character.name}>{character.name}</li>
                 ))}
               </ul>

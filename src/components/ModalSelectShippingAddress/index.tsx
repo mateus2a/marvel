@@ -44,7 +44,7 @@ function ModalSelectShippingAddress({
               {comics.length < 1 && <p>Nenhum Quadrinho selecionado!</p>}
               <ul>
                 {comics.map((comic) => (
-                  <li>{comic.title}</li>
+                  <li key={comic.id}>{comic.title}</li>
                 ))}
               </ul>
             </S.ListComics>

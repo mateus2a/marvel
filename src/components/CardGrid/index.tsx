@@ -1,4 +1,8 @@
+import { useCallback, useState } from 'react';
+
 import Card from '../Card';
+import ModalDetailComic from '../ModalDetailComic';
+
 import * as S from './styles';
 
 interface Comic {
@@ -22,6 +26,18 @@ interface CardGridProps {
 }
 
 function CardGrid({ comics }: CardGridProps) {
+  const [comicSelected, setComicSelected] = useState<Comic>();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const handleCloseModal = useCallback(() => {
+    setModalIsOpen(false);
+  }, []);
+
+  const handleComicSelected = useCallback((comic: Comic) => {
+    setComicSelected(comic);
+    setModalIsOpen(true);
+  }, []);
+
   if (comics.length === 0) {
     return (
       <S.NoResults>
@@ -31,11 +47,22 @@ function CardGrid({ comics }: CardGridProps) {
   }
 
   return (
-    <S.Container>
-      {comics.map((comic: Comic) => (
-        <Card key={comic.id} comic={comic} />
-      ))}
-    </S.Container>
+    <>
+      <S.Container>
+        {comics.map((comic: Comic) => (
+          <Card
+            key={comic.id}
+            comic={comic}
+            handleComicSelected={handleComicSelected}
+          />
+        ))}
+      </S.Container>
+      <ModalDetailComic
+        isOpen={modalIsOpen}
+        onRequestClose={handleCloseModal}
+        comic={comicSelected}
+      />
+    </>
   );
 }
 

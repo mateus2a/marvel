@@ -24,6 +24,7 @@ function Modal({ children, isOpen, onRequestClose, contentLabel }: ModalProps) {
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       contentLabel={contentLabel}
+      ariaHideApp={false}
       style={{
         content: {
           top: '50%',
