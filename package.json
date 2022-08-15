@@ -5,6 +5,7 @@
   "dependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
+    "@googlemaps/react-wrapper": "^1.1.35",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -29,6 +30,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "fast-equals": "^4.0.1",
     "husky": "^8.0.1",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
@@ -64,6 +66,8 @@
     ]
   },
   "devDependencies": {
+    "@googlemaps/typescript-guards": "^2.0.1",
+    "@types/google.maps": "^3.49.2",
     "eslint-config-standard-with-typescript": "^22.0.0",
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0"
