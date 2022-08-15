@@ -9,3 +9,14 @@ export const Container = styled.div`
   flex-wrap: wrap;
   gap: 1.5rem;
 `;
+
+export const NoResults = styled.div`
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    color: var(--black);
+  }
+`;
