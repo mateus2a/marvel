@@ -6,9 +6,13 @@ function generateUrlParamsMarvelApi() {
 
   const timestamp = Math.floor(new Date().getTime() / 1000);
 
-  const hashMD5 = MD5(`${timestamp}${privateKey}${publicKey}`);
+  const hashMD5 = MD5(`${timestamp}${privateKey}${publicKey}`).toString();
 
-  return `ts=${timestamp}&apikey=${publicKey}&hash=${hashMD5}`;
+  return {
+    ts: timestamp,
+    apikey: publicKey,
+    hash: hashMD5,
+  };
 }
 
 export default generateUrlParamsMarvelApi;
