@@ -80,6 +80,7 @@ function Home() {
 
         setComics([...updatedComics]);
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.log(err);
       } finally {
         hideLoader();
