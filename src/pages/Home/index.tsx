@@ -32,20 +32,27 @@ interface Comic {
 
 function Home() {
   const [comics, setComics] = useState<Comic[]>([]);
-  const [filterComics, setFilterComics] = useState<Comic[]>([]);
   const [searchFilter, setSearchFilter] = useState('');
   const [totalComics, setTotalComics] = useState(0);
+  const [oldDebouncedSearchFilter, setOldDebouncedSearchFilter] = useState('');
 
   const { nextPage, offset } = usePagination();
   const { isLoading, showLoader, hideLoader } = useLoader();
   const debouncedSearchFilter = useDebounce(searchFilter, 500);
 
   useEffect(() => {
-    async function loadData(data: Comic[], setData: (data: Comic[]) => void) {
+    async function loadData() {
       try {
         showLoader();
 
-        const updatedData = [...data];
+        let updatedComics: Comic[] = [];
+
+        if (oldDebouncedSearchFilter === debouncedSearchFilter) {
+          updatedComics = [...comics];
+        } else {
+          nextPage(0);
+          setOldDebouncedSearchFilter(debouncedSearchFilter);
+        }
 
         let response;
 
@@ -57,21 +64,21 @@ function Home() {
           response = await api.get(`/comics?offset=${offset}`);
         }
 
-        response.data.data.results.forEach((comic: any) => {
-          updatedData.push({
-            id: comic.id,
-            thumbnail: comic.thumbnail,
-            title: comic.title,
-            description: comic.description,
-            creators: comic.creators,
-            characters: comic.characters,
-            pageCount: comic.pageCount,
+        response.data.data.results.forEach((comicItem: any) => {
+          updatedComics.push({
+            id: comicItem.id,
+            thumbnail: comicItem.thumbnail,
+            title: comicItem.title,
+            description: comicItem.description,
+            creators: comicItem.creators,
+            characters: comicItem.characters,
+            pageCount: comicItem.pageCount,
           });
         });
 
         setTotalComics(response.data.data.total);
 
-        setData([...updatedData]);
+        setComics([...updatedComics]);
       } catch (err) {
         console.log(err);
       } finally {
@@ -79,19 +86,7 @@ function Home() {
       }
     }
 
-    if (!debouncedSearchFilter && comics.length === 0) {
-      nextPage(0);
-      setFilterComics([]);
-      loadData(comics, setComics);
-    } else if (!debouncedSearchFilter && comics.length > 0) {
-      loadData(comics, setComics);
-    } else if (debouncedSearchFilter && filterComics.length === 0) {
-      nextPage(0);
-      setComics([]);
-      loadData(filterComics, setFilterComics);
-    } else if (debouncedSearchFilter && filterComics.length > 0) {
-      loadData(filterComics, setFilterComics);
-    }
+    loadData();
   }, [offset, debouncedSearchFilter]);
 
   return (
@@ -108,15 +103,11 @@ function Home() {
           <Loading />
         ) : (
           <>
-            <CardGrid comics={debouncedSearchFilter ? filterComics : comics} />
+            <CardGrid comics={comics} />
 
             {totalComics > offset + 20 && (
               <Button
-                onClick={() =>
-                  nextPage(
-                    debouncedSearchFilter ? filterComics.length : comics.length
-                  )
-                }
+                onClick={() => nextPage(comics.length)}
                 title="Carregar Mais"
               />
             )}
