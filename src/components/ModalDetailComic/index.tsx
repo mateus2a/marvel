@@ -1,8 +1,6 @@
-import ReactModal from 'react-modal';
+import Modal from '../Modal';
 
 import * as S from './styles';
-
-import Close from '../../assets/close.svg';
 
 interface Comic {
   id: string;
@@ -32,37 +30,13 @@ function ModalDetailComic({
   isOpen,
   onRequestClose,
 }: ModalDetailComicProps) {
-  if (isOpen) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = 'auto';
-  }
-
   return (
-    <ReactModal
+    <Modal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       contentLabel="Comic Detail"
-      style={{
-        content: {
-          top: '50%',
-          left: '50%',
-          right: 'auto',
-          bottom: 'auto',
-          marginRight: '-50%',
-          transform: 'translate(-50%, -50%)',
-          maxWidth: '750px',
-          background: '#fff',
-        },
-        overlay: {
-          backgroundColor: '#000000bb',
-        },
-      }}
     >
-      <S.Container>
-        <button type="button" onClick={onRequestClose}>
-          <img src={Close} alt="Fechar modal" />
-        </button>
+      <S.Wrapper>
         <h2>{comic.title}</h2>
         <S.Content>
           <img
@@ -93,7 +67,7 @@ function ModalDetailComic({
               )}
               <ul>
                 {comic.creators.items.map((creator) => (
-                  <li>{creator.name}</li>
+                  <li key={creator.name}>{creator.name}</li>
                 ))}
               </ul>
             </div>
@@ -104,14 +78,14 @@ function ModalDetailComic({
               )}
               <ul>
                 {comic.characters.items.map((character) => (
-                  <li>{character.name}</li>
+                  <li key={character.name}>{character.name}</li>
                 ))}
               </ul>
             </div>
           </S.ContentDetail>
         </S.Content>
-      </S.Container>
-    </ReactModal>
+      </S.Wrapper>
+    </Modal>
   );
 }
 
