@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { ComicsSelectedProvider } from '../useComicsSelected';
 import { LoaderProvider } from '../useLoader';
 import { PaginationProvider } from '../usePagination';
 
@@ -8,9 +9,11 @@ interface AppProviderProps {
 
 function AppProvider({ children }: AppProviderProps) {
   return (
-    <LoaderProvider>
-      <PaginationProvider>{children}</PaginationProvider>
-    </LoaderProvider>
+    <ComicsSelectedProvider>
+      <LoaderProvider>
+        <PaginationProvider>{children}</PaginationProvider>
+      </LoaderProvider>
+    </ComicsSelectedProvider>
   );
 }
 
