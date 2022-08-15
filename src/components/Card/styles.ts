@@ -5,6 +5,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  cursor: pointer;
   img {
     width: 216px;
     height: 324px;

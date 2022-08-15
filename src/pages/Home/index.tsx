@@ -20,6 +20,14 @@ interface Comic {
     extension: string;
   };
   title: string;
+  description: string;
+  creators: {
+    items: [{ name: string }];
+  };
+  characters: {
+    items: [{ name: string }];
+  };
+  pageCount: number;
 }
 
 function Home() {
@@ -54,6 +62,10 @@ function Home() {
             id: comic.id,
             thumbnail: comic.thumbnail,
             title: comic.title,
+            description: comic.description,
+            creators: comic.creators,
+            characters: comic.characters,
+            pageCount: comic.pageCount,
           });
         });
 
@@ -85,31 +97,32 @@ function Home() {
   return (
     <S.Container>
       <Header />
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <S.Content>
-          <Input
-            type="text"
-            placeholder="Buscar pelo nome do quadrinho"
-            value={searchFilter}
-            onChange={(event) => setSearchFilter(event.target.value)}
-          />
+      <S.Content>
+        <Input
+          type="text"
+          placeholder="Buscar pelo nome do quadrinho"
+          value={searchFilter}
+          onChange={(event) => setSearchFilter(event.target.value)}
+        />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <CardGrid comics={debouncedSearchFilter ? filterComics : comics} />
 
-          <CardGrid comics={debouncedSearchFilter ? filterComics : comics} />
-
-          {totalComics > offset + 20 && (
-            <Button
-              onClick={() =>
-                nextPage(
-                  debouncedSearchFilter ? filterComics.length : comics.length
-                )
-              }
-              title="Carregar Mais"
-            />
-          )}
-        </S.Content>
-      )}
+            {totalComics > offset + 20 && (
+              <Button
+                onClick={() =>
+                  nextPage(
+                    debouncedSearchFilter ? filterComics.length : comics.length
+                  )
+                }
+                title="Carregar Mais"
+              />
+            )}
+          </>
+        )}
+      </S.Content>
     </S.Container>
   );
 }

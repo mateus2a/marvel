@@ -8,6 +8,14 @@ interface Comic {
     extension: string;
   };
   title: string;
+  description: string;
+  creators: {
+    items: [{ name: string }];
+  };
+  characters: {
+    items: [{ name: string }];
+  };
+  pageCount: number;
 }
 interface CardGridProps {
   comics: Comic[];
@@ -24,12 +32,8 @@ function CardGrid({ comics }: CardGridProps) {
 
   return (
     <S.Container>
-      {comics.map((item: Comic) => (
-        <Card
-          key={item.id}
-          imgUrl={`${item.thumbnail.path}.${item.thumbnail.extension}`}
-          title={item.title}
-        />
+      {comics.map((comic: Comic) => (
+        <Card key={comic.id} comic={comic} />
       ))}
     </S.Container>
   );

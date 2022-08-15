@@ -18,5 +18,7 @@ export const NoResults = styled.div`
   justify-content: center;
   h1 {
     color: var(--black);
+    text-align: center;
+    padding: 0 1rem;
   }
 `;
