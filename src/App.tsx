@@ -1,4 +1,4 @@
-import AppProvider from './hooks/Providers/index';
+import AppProvider from './hooks/Providers';
 
 import Home from './pages/Home';
 
