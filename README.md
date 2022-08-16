@@ -1,46 +1,83 @@
-# Getting Started with Create React App
+<h1 align="center">
+  Marvel Comics
+</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Indice
+- [Sobre](#-sobre)
+- [Funcionalidades](#-funcionalidades)
+- [Próximos passos](#-próximos-passos)
+- [Tecnologias](#-tecnologias)
+- [Como baixar e executar o projeto](#-como-baixar-e-executar-o-projeto)
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🔖 Sobre
 
-### `yarn start`
+O **Marvel Comics** é uma aplicação web desenvolvida com o intuito de consumir e explorar informações dos quadrinhos da API da Marvel.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🚀 Funcionalidades
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Layout responsivo
+- Listar quadrinhos da API
+- Paginação das informações
+- Modal de detalhes do quadrinho ao clica sobre ele
+- Filtro de busca para pesquisar quadrinhos pelo título
+  - Para o filtro foi desenvolvido um hook de debounce para melhorar a performance
+- Selecionar quadrinhos para envio
+  - Modal que lista os quadrinhos selecionados e disponibiiliza um mapa para selecionar o local de envio
+- Exibir os repositórios do perfil no Github
+- Padronização de código utilizando ESlint e Prettier
 
-### `yarn test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🎯 Próximos passos
 
-### `yarn build`
+- Desenvilvimento de uma suíte de testes
+- Listagem das demais informações da API
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 👩🏻‍💻 Tecnologias
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [ReactJS](https://reactjs.org/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Styled-components](https://styled-components.com/)
+- [Axios](https://axios-http.com/docs/intro)
+- [API da Marvel](https://developer.marvel.com/)
+- [API do Google Maps](https://developers.google.com/maps/documentation/javascript/overview)
+- [VS Code](https://code.visualstudio.com/) with [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/)
 
-### `yarn eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 🗂 Como baixar e executar o projeto
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Para clonar e executar esta aplicação na sua máquina é necessário ter instalado:
+- [Git](https://git-scm.com/)
+- [Yarn](https://yarnpkg.com/)
+- [Node.js](https://nodejs.org/en/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Para configurar a aplicação também é preciso ter:
+- [Chave pública e privada da API da Marvel](https://developer.marvel.com/account)
+- [Chave da API do Google Maps](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
 
-## Learn More
+  # Clonar o repositório
+  $ git clone https://github.com/mateus2a/marvel.git marvel-brisanet
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  # Entrar no diretório
+  $ cd marvel-brisanet
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  # Instalar as dependências
+  $ yarn install
+
+  # Duplicar o arquivo .env.example, renomear para .env e substituir as informações de acesso no seu devido local.
+
+  # Iniciar o projeto
+  $ yarn start
+
+```
+
+<br />
+
+Desenvolvido por [Mateus Alencar](https://github.com/mateus2a)
