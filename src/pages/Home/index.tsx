@@ -58,10 +58,12 @@ function Home() {
 
         if (debouncedSearchFilter) {
           response = await api.get(
-            `/comics?offset=${offset}&titleStartsWith=${debouncedSearchFilter}`
+            `https://gateway.marvel.com/v1/public/comics?offset=${offset}&titleStartsWith=${debouncedSearchFilter}`
           );
         } else {
-          response = await api.get(`/comics?offset=${offset}`);
+          response = await api.get(
+            `https://gateway.marvel.com/v1/public/comics?offset=${offset}`
+          );
         }
 
         response.data.data.results.forEach((comicItem: any) => {
